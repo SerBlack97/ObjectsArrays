@@ -16,8 +16,21 @@ const pokemon = [
     type: "electric",
     maxHp: 95,
     moves: ["Quick Attack", "Thunder Shock", "Thunderbolt"]
+  },{
+    name: "Lemon Man",
+    type: "electric",
+    maxHp: 50,
+    moves: ["Dehydrated Yellow", "Lemon Time", "Good Job"]
   }
 ];
+
+// page colors for types
+const pageColor = {
+  fire: '#FFCCCC',
+  water: '#8DC7EB ',
+  electric: '#FFF3CC',
+  default: '#ffff'
+};
 
 // reference to html elements
 const dropdown = document.getElementById('pokemons');
@@ -35,7 +48,7 @@ dropdown.addEventListener('change', (event) => {
   const selection = event.target.value;
   
   const choice = pokemon.find(p => p.name.toLowerCase() === selection);
-  
+  //selection with stats
   if (choice) {
     displayDiv.innerHTML = `
       <h2>${choice.name}</h2>
@@ -43,9 +56,12 @@ dropdown.addEventListener('change', (event) => {
       <p><strong>Max HP:</strong> ${choice.maxHp}</p>
       <p><strong>Moves:</strong> ${choice.moves.join(', ')}</p>
     `;
+    //change page color
+    document.body.style.backgroundColor = pageColor[choice.type] || pageColor.default;
   } else {
-    // Clear the display if the default option is selected
-    displayDiv.innerHTML = '<p>Select a Pokémon</p>';
+    //reset choice and color
+    displayDiv.innerHTML = '<p>Select Pokémon</p>';
+    document.body.style.backgroundColor = pageColor.default;
   }
 });
 
